@@ -9,13 +9,16 @@ import javax.swing.SwingConstants;
 
 public class PG1 {
 
-	static JLabel lab = new JLabel("RamÃ³n JesÃºs GÃ³mez Carmona");
+	static JLabel lab = new JLabel("Ramón Jesús Gómez Carmona");
+
 	static JLabel email = new JLabel("smr2gocar@gmail.com");
 
 	public static void main(String[] args) throws InterruptedException {
 
 		JFrame jf = new JFrame("Scroll Effect");
+
 		jf.setTitle("Sobre");
+
 		jf.setIconImage(Toolkit.getDefaultToolkit().getImage(PG1.class.getResource("/images/about.png")));
 
 		JPanel jp = new JPanel();
@@ -23,7 +26,9 @@ public class PG1 {
 		jf.setSize(600, 350);
 
 		jp.setSize(800, 600);
+
 		lab.setIcon(new ImageIcon(PG1.class.getResource("/images/dev.png")));
+
 		lab.setBounds(184, 251, 340, 48);
 
 		lab.setHorizontalAlignment(SwingConstants.CENTER);
@@ -48,7 +53,7 @@ public class PG1 {
 		lblNewLabel_1.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblNewLabel_1.setBounds(184, 12, 340, 53);
 		jp.add(lblNewLabel_1);
-
+		jf.setLocationRelativeTo(null);
 		jf.setVisible(true);
 
 		scrollEffect();
