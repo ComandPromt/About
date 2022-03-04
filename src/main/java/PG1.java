@@ -1,27 +1,66 @@
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
-public class PG1 {
+@SuppressWarnings("all")
+
+public class PG1 extends Thread implements ActionListener, ChangeListener {
 
 	static JLabel lab = new JLabel("Ramón Jesús Gómez Carmona");
 
 	static JLabel email = new JLabel("smr2gocar@gmail.com");
 
-	public static void main(String[] args) throws InterruptedException {
+	static boolean andar = true;
+
+	@Override
+
+	public void run() {
+
+		try {
+
+			scrollEffect();
+		}
+
+		catch (InterruptedException e) {
+			//
+		}
+
+	}
+
+	public PG1() {
 
 		JFrame jf = new JFrame("Scroll Effect");
 
+		jf.addWindowListener(new WindowAdapter() {
+
+			@Override
+
+			public void windowClosing(WindowEvent e) {
+
+				andar = false;
+
+			}
+
+		});
+
+		jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
 		jf.setAlwaysOnTop(true);
-		
+
 		jf.setTitle("Sobre");
 
-		jf.setIconImage(Toolkit.getDefaultToolkit().getImage(PG1.class.getResource("/images/about.png")));
+		jf.setIconImage(Toolkit.getDefaultToolkit().getImage(PG1.class.getResource("/imagenes/PG1.png")));
 
 		JPanel jp = new JPanel();
 
@@ -29,7 +68,7 @@ public class PG1 {
 
 		jp.setSize(800, 600);
 
-		lab.setIcon(new ImageIcon(PG1.class.getResource("/images/dev.png")));
+		lab.setIcon(new ImageIcon(PG1.class.getResource("/imagenes/dev.png")));
 
 		lab.setBounds(184, 251, 340, 48);
 
@@ -42,46 +81,64 @@ public class PG1 {
 		jp.add(lab);
 
 		jf.getContentPane().add(jp);
+
 		email.setHorizontalAlignment(SwingConstants.CENTER);
-		email.setIcon(new ImageIcon(PG1.class.getResource("/images/email.png")));
+
+		email.setIcon(new ImageIcon(PG1.class.getResource("/imagenes/email.png")));
 
 		email.setFont(new Font("Arial", Font.PLAIN, 20));
+
 		email.setBounds(194, 319, 330, 42);
+
 		jp.add(email);
 
 		JLabel lblNewLabel_1 = new JLabel("Programa creado por");
-		lblNewLabel_1.setIcon(new ImageIcon(PG1.class.getResource("/images/created.png")));
+
+		lblNewLabel_1.setIcon(new ImageIcon(PG1.class.getResource("/imagenes/created.png")));
+
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+
 		lblNewLabel_1.setFont(new Font("Arial", Font.PLAIN, 20));
+
 		lblNewLabel_1.setBounds(184, 12, 340, 53);
+
 		jp.add(lblNewLabel_1);
-		jf.setLocationRelativeTo(null);
+
 		jf.setVisible(true);
 
-		scrollEffect();
+		jf.setLocationRelativeTo(null);
 
 	}
 
-	static void scrollEffect() throws InterruptedException {
+	public static void scrollEffect() throws InterruptedException {
 
 		int x = -80;
 
-		while (true) {
+		while (andar) {
 
 			if (x == -196) {
+
 				x = -80;
 
 			}
 
 			x--;
 
-			PG1.lab.setBounds(-120, x, 800, 600);
+			lab.setBounds(-120, x, 800, 600);
 
-			PG1.email.setBounds(170, x, 300, 700);
+			email.setBounds(170, x, 300, 700);
 
 			Thread.sleep(20);
 
 		}
+
+	}
+
+	public void stateChanged(ChangeEvent arg0) {
+
+	}
+
+	public void actionPerformed(ActionEvent arg0) {
 
 	}
 
