@@ -9,7 +9,7 @@ import javax.swing.SwingConstants;
 
 public class PG1 {
 
-	static JLabel lab = new JLabel("Ramón Jesús Gómez Carmona");
+	static JLabel lab = new JLabel("RamÃ³n JesÃºs GÃ³mez Carmona");
 
 	static JLabel email = new JLabel("smr2gocar@gmail.com");
 
@@ -17,6 +17,8 @@ public class PG1 {
 
 		JFrame jf = new JFrame("Scroll Effect");
 
+		jf.setAlwaysOnTop(true);
+		
 		jf.setTitle("Sobre");
 
 		jf.setIconImage(Toolkit.getDefaultToolkit().getImage(PG1.class.getResource("/images/about.png")));
