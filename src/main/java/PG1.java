@@ -126,7 +126,7 @@ public class PG1 extends Thread implements ActionListener, ChangeListener {
 
 			lab.setBounds(-120, x, 800, 600);
 
-			email.setBounds(170, x, 300, 700);
+			email.setBounds(170, x+25, 300, 700);
 
 			Thread.sleep(20);
 
