@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
@@ -15,7 +16,8 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-public class Sobre implements ActionListener, ChangeListener, Runnable {
+@SuppressWarnings("serial")
+public class Sobre extends JPanel implements ActionListener, ChangeListener, Runnable {
 
 	private JLabel lab;
 
@@ -28,6 +30,141 @@ public class Sobre implements ActionListener, ChangeListener, Runnable {
 	private JFrame jf;
 
 	private int sleep;
+
+	private boolean andar;
+
+	private Thread thread;
+
+	public void setAndar(boolean andar) {
+
+		this.andar = andar;
+
+		if (andar) {
+
+			jf.setVisible(true);
+
+			setVisible(true);
+
+			thread = new Thread(this);
+
+			thread.start();
+
+		}
+
+		else {
+
+			jf.setVisible(false);
+
+			setVisible(false);
+
+		}
+
+	}
+
+	@Override
+	public void setBackground(Color bg) {
+
+		try {
+
+			jf.setBackground(bg);
+
+			lab.setBackground(bg);
+
+			email.setBackground(bg);
+
+			lblNewLabel_1.setBackground(bg);
+
+		}
+
+		catch (Exception e) {
+
+		}
+
+	}
+
+	public void setEmail(Color color) {
+
+		try {
+
+			email.setForeground(color);
+
+		}
+
+		catch (Exception e) {
+
+		}
+
+	}
+
+	public void setEmail(Font font) {
+
+		try {
+
+			email.setFont(font);
+
+		}
+
+		catch (Exception e) {
+
+		}
+
+	}
+
+	public void setTitle(Color color) {
+
+		try {
+
+			lblNewLabel_1.setForeground(color);
+
+		}
+
+		catch (Exception e) {
+
+		}
+
+	}
+
+	public void setTitle(Font font) {
+
+		try {
+
+			lblNewLabel_1.setFont(font);
+
+		}
+
+		catch (Exception e) {
+
+		}
+
+	}
+
+	public void setDevTitle(Color color) {
+
+		try {
+
+			lab.setForeground(color);
+
+		}
+
+		catch (Exception e) {
+
+		}
+
+	}
+
+	public void setDevTitle(Font font) {
+
+		try {
+
+			lab.setFont(font);
+
+		}
+
+		catch (Exception e) {
+
+		}
+
+	}
 
 	public void setIconoTitulo(Icon icon) {
 
@@ -117,7 +254,7 @@ public class Sobre implements ActionListener, ChangeListener, Runnable {
 
 		if (sleep < 1) {
 
-			sleep = 100;
+			sleep = 200;
 
 		}
 
@@ -135,13 +272,13 @@ public class Sobre implements ActionListener, ChangeListener, Runnable {
 
 		if (ancho < 1) {
 
-			ancho = 600;
+			ancho = 500;
 
 		}
 
 		if (alto < 1) {
 
-			alto = 200;
+			alto = 400;
 
 		}
 
@@ -149,9 +286,14 @@ public class Sobre implements ActionListener, ChangeListener, Runnable {
 
 		jf = new JFrame();
 
+		jf.setResizable(false);
+
 		jf.getContentPane().addComponentListener(new ComponentAdapter() {
+
 			@Override
+
 			public void componentResized(ComponentEvent e) {
+
 				lab.setBounds(0, lab.getY(), w, lab.getHeight());
 
 				email.setBounds(0, email.getY(), w, email.getHeight());
@@ -166,17 +308,19 @@ public class Sobre implements ActionListener, ChangeListener, Runnable {
 
 		jf.setAlwaysOnTop(true);
 
-		jf.setIconImage(Toolkit.getDefaultToolkit().getImage(Sobre.class.getResource("/imagenes/about.png")));
+		jf.setIconImage(Toolkit.getDefaultToolkit().getImage(Sobre.class.getResource("/imgs/imagenes/about.png")));
 
 		JPanel jp = new JPanel();
 
+		jp.setBackground(Color.WHITE);
+
 		jp.setSize(ancho, alto);
 
-		jf.setSize(623, 264);
+		jf.setSize(ancho, alto);
 
 		jf.getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
 
-		lab.setIcon(new ImageIcon(Sobre.class.getResource("/imagenes/dev.png")));
+		lab.setIcon(new ImageIcon(Sobre.class.getResource("/imgs/imagenes/dev.png")));
 
 		lab.setBounds(0, 251, 862, 48);
 
@@ -192,7 +336,7 @@ public class Sobre implements ActionListener, ChangeListener, Runnable {
 
 		email.setHorizontalAlignment(SwingConstants.CENTER);
 
-		email.setIcon(new ImageIcon(Sobre.class.getResource("/imagenes/email.png")));
+		email.setIcon(new ImageIcon(Sobre.class.getResource("/imgs/imagenes/email.png")));
 
 		email.setFont(new Font("Arial", Font.PLAIN, 20));
 
@@ -202,7 +346,7 @@ public class Sobre implements ActionListener, ChangeListener, Runnable {
 
 		lblNewLabel_1 = new JLabel(titulo);
 
-		lblNewLabel_1.setIcon(new ImageIcon(Sobre.class.getResource("/imagenes/created.png")));
+		lblNewLabel_1.setIcon(new ImageIcon(Sobre.class.getResource("/imgs/imagenes/created.png")));
 
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -216,7 +360,9 @@ public class Sobre implements ActionListener, ChangeListener, Runnable {
 
 		jf.setLocationRelativeTo(null);
 
-		Thread thread = new Thread(this);
+		setBackground(Color.WHITE);
+
+		thread = new Thread(this);
 
 		thread.start();
 
@@ -227,7 +373,7 @@ public class Sobre implements ActionListener, ChangeListener, Runnable {
 
 		int y = jf.getHeight();
 
-		while (!Thread.currentThread().isInterrupted()) {
+		while (andar && !Thread.currentThread().isInterrupted()) {
 
 			if (y <= (lblNewLabel_1.getHeight() + 15)) {
 
@@ -250,6 +396,12 @@ public class Sobre implements ActionListener, ChangeListener, Runnable {
 			catch (InterruptedException e) {
 
 				Thread.currentThread().interrupt();
+
+				break;
+
+			}
+
+			if (!andar) {
 
 				break;
 
